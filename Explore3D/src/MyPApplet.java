@@ -44,7 +44,7 @@ public class MyPApplet extends PApplet{
         background(0);
 
 
-       // camera(space.x, space.y, space.z, p1.x, p1.y, p1.z, 0,1,0);
+        camera(space.x, space.y, space.z, p1.x, p1.y, p1.z, 0,1,0);
 
 
         sphereX = width/2;
@@ -80,6 +80,7 @@ public class MyPApplet extends PApplet{
         popMatrix();
 
 
+        rotateY(radians(r));
 
         pushMatrix();
             fill(0,155,0);
