@@ -102,4 +102,4 @@ fabric.properties
 .idea
 *.iml
 
-.tif
+*.tif
