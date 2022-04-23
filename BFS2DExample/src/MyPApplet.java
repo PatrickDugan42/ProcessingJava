@@ -62,7 +62,7 @@ public class MyPApplet extends PApplet{
         }
         anim.step();
         anim.display(this);
-        saveFrame("data/line-#####.tif");
+        //saveFrame("data/line-#####.tif");
     }
 
 }
