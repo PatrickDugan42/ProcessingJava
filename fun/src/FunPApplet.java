@@ -21,7 +21,7 @@ public class FunPApplet extends PApplet{
 
     @Override
     public void settings() {
-        size(1920, 1080, P3D);
+        size(320, 240, P3D);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class FunPApplet extends PApplet{
         rotateY(radians(r));
         rotate(radians(r));
         rotateX(radians(r));
-        stroke(255,0,255);
+        stroke(cos(radians(t)) *255,sin(radians(r))*255,r%255);
         fill(255 ,0,0);
         drawPointCloud();
         popMatrix();
@@ -100,7 +100,7 @@ public class FunPApplet extends PApplet{
 
         r+=1;
         t+=.015;
-        //saveFrame("data/forces-#####.tif");
+        saveFrame("data/forces-#####.tif");
 
 
     }
@@ -113,7 +113,7 @@ public class FunPApplet extends PApplet{
 //                    translate(p.x*20 , p.y*20, p.z*20);
 //                    point(0,0,0);
 //
-                    point(p.x*20, p.y*20, p.z*20);
+                    point(p.x*10, p.y*10, p.z*10);
                     popMatrix();
                 }
             }
@@ -122,6 +122,15 @@ public class FunPApplet extends PApplet{
     }
 
 
+    /**
+     * the idea is to apply a force to the object that will almost reach the object at it's max.  That
+     * doesn't exclude other pullers from pulling something closer to different objects origin than that object
+     * allows itslef to pull
+     * @param puller
+     * @param pullerForce
+     * @param object
+     * @return
+     */
     public PVector pullObject(PVector puller, float pullerForce, PVector object){
 
 //        PVector forceDirection = PVector.sub(puller, object);
@@ -138,7 +147,7 @@ public class FunPApplet extends PApplet{
         PVector distance = PVector.sub(puller, object);
         float maxMag = distance.mag();
 
-        if(pullerForce > maxMag) return puller.copy();
+        if(pullerForce > maxMag) return puller.copy().add(distance.normalize().mult(6));
 
         return PVector.add(object, distance.normalize().mult(pullerForce));
 
